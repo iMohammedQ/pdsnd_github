@@ -197,9 +197,9 @@ def main():
         trip_duration_stats(df)
         user_stats(df)
         display_data(df)
-        print("\n ____________________________________________________\n\n\n")
+        print("\n ____________________________________________________\n")
         """Change number 1 I add new line to decorate the output """
-        
+
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
