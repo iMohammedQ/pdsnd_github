@@ -20,13 +20,13 @@ def get_filters():
     city = input("\n Please enter the city chicago, new york city or washington : ").lower()
     while city not in ["chicago", "new york city", "washington"]:
         city = input("\nError please entnr again (Chicago, New york city, Washington) : ").lower()
-    
+
 
     # TO DO: get user input for month (all, january, february, ... , june)
     month = input("\nPlease enter month from January to June to show data in that month or type all for all months : ").lower()
     while month not in ["all","january","february","march","april","may","june"]:
        month = input("\n not valid month please enter again : ").lower()
-    
+
 
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
     day = input("\nPlease enter the day or enter all for all days : ").lower()
@@ -59,7 +59,7 @@ def load_data(city, month, day):
 
     # filter by month if applicable
     if month != 'all':
-        
+
         # use the index of the months list to get the corresponding int
         months = ['january', 'february', 'march', 'april', 'may', 'june']
         month = months.index(month) + 1
@@ -71,7 +71,7 @@ def load_data(city, month, day):
     if day != 'all':
         # filter by day of week to create the new dataframe
         df = df[df['day_of_week'] == day.title()]
-        
+
     return df
 
 
@@ -91,7 +91,7 @@ def time_stats(df):
     df["hour"] = df["Start Time"].dt.hour
     print("\nThe most common starting hour is {}".format(df["hour"].mode()[0]))
 
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -121,11 +121,11 @@ def trip_duration_stats(df):
 
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
-    
+
     df["Total trip Time"] = pd.to_datetime(df["End Time"]) - pd.to_datetime(df["Start Time"])
-    """ Changing data type to datetime which is function in pandas 
+    """ Changing data type to datetime which is function in pandas
     https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.to_datetime.html#pandas.to_datetime """
-    
+
     # TO DO: display total travel time
     total_travel = df["Total trip Time"].sum()
     print("\nTotal travel time is",total_travel)
@@ -147,9 +147,9 @@ def user_stats(df):
     # TO DO: Display counts of user types
     type_of_user = df.groupby("User Type")['User Type'].count()
     print("\nNumber of users for each type user are\n",type_of_user)
-    
+
     """ https://stackoverflow.com/questions/15705630/get-the-rows-which-have-the-max-value-in-groups-using-groupby """
-    
+
     # TO DO: Display counts of gender
     if "Gender" not in df:
         print("\nNo gender data avaliable in this city")
@@ -164,29 +164,29 @@ def user_stats(df):
         print("\nThe earliest birth year in this city is {}".format(int(df["Birth Year"].min())))
         print("The most recent birth year in this city is {}".format(int(df["Birth Year"].max())))
         print("The most common birth year in this city is {}".format(int(df["Birth Year"].mode()[0])))
-        
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 def display_data(df):
     """ Display contents of the data to the display when the user requested """
-    
+
     start_count = 0
     end_count = 5
 
     display_row = input("Do you want to see data? Enter yes to display it.\n").lower()
     if display_row == 'yes':
-        while end_count < df.shape[0]: 
+        while end_count < df.shape[0]:
             print(df.iloc[start_count:end_count:])
             start_count = start_count + 5
             end_count = end_count + 5
             display_end = input("Do you wish to continue? Enter no to end displaying more rows.\n").lower()
             if display_end == 'no':
                break
-            
+
     """ https://www.geeksforgeeks.org/python-pandas-df-size-df-shape-and-df-ndim/ """
     """ also  https://www.shanelynn.ie/summarising-aggregation-and-grouping-data-in-python-pandas/ """
-     
+
 def main():
     while True:
         city, month, day = get_filters()
@@ -197,6 +197,8 @@ def main():
         trip_duration_stats(df)
         user_stats(df)
         display_data(df)
+        print("\n ____________________________________________________\n\n\n")
+        """Change number 1 I add new line to decorate the output """
         
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
