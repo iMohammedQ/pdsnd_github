@@ -162,8 +162,10 @@ def user_stats(df):
         print("\nNo birth year data avaliable in this city")
     else:
         print("\nThe earliest birth year in this city is {}".format(int(df["Birth Year"].min())))
+        print("\nThe earliest age in this city is {}".format(int(2019-df["Birth Year"].min())))
         print("The most recent birth year in this city is {}".format(int(df["Birth Year"].max())))
         print("The most common birth year in this city is {}".format(int(df["Birth Year"].mode()[0])))
+        print("The most common age in this city is {}".format(int(2019-df["Birth Year"].mode()[0])))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
