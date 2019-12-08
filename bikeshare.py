@@ -164,6 +164,7 @@ def user_stats(df):
         print("\nThe earliest birth year in this city is {}".format(int(df["Birth Year"].min())))
         print("\nThe earliest age in this city is {}".format(int(2019-df["Birth Year"].min())))
         print("The most recent birth year in this city is {}".format(int(df["Birth Year"].max())))
+        print("The most recent age in this city is {}".format(int(2019-df["Birth Year"].max())))
         print("The most common birth year in this city is {}".format(int(df["Birth Year"].mode()[0])))
         print("The most common age in this city is {}".format(int(2019-df["Birth Year"].mode()[0])))
 
@@ -199,8 +200,7 @@ def main():
         trip_duration_stats(df)
         user_stats(df)
         display_data(df)
-        print("\n*****************************************************************\n")
-        """ just make it easier """
+
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
